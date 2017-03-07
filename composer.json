@@ -1,0 +1,34 @@
+{
+  "name": "matiasiglesias/cuit-validator",
+  "description": "Módulo de Validación de CUIT",
+  "keywords": [
+    "cuit",
+    "zend framework",
+    "zf2",
+    "validator",
+    "afip",
+    "argentina",
+    "clave única de identificación tributaria"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/matiasiglesias/zf2-cuit-validator",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matias Iglesias",
+      "email": "matiasiglesias@matiasiglesias.com.ar",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "zendframework/zend-stdlib": "^2.4 || ^3.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "CuitValidator": "src/"
+    },
+    "classmap": [
+      "./Module.php"
+    ]
+  }
+}
