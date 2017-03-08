@@ -28,6 +28,7 @@ class Cuit extends AbstractValidator
     protected $options = array(
         'incluirEmpresas' => false,
         'incluirPersonas' => true,
+        'filtrarCuitNoNumerico' => true,
     );
 
     /**
@@ -53,7 +54,7 @@ class Cuit extends AbstractValidator
             $options = $temp;
         }
 
-       parent::__construct($options);
+        parent::__construct($options);
     }
 
     /**
@@ -70,7 +71,7 @@ class Cuit extends AbstractValidator
      * Sets the incluirEmpresas option
      *
      * @param  bool $incluirEmpresas
-     * @return Between Provides a fluent interface
+     * @return Cuit Provides a fluent interface
      */
     public function setIncluirEmpresas($incluirEmpresas)
     {
@@ -92,7 +93,7 @@ class Cuit extends AbstractValidator
      * Sets the incluirPersonas option
      *
      * @param  bool $incluirPersonas
-     * @return Between Provides a fluent interface
+     * @return Cuit Provides a fluent interface
      */
     public function setIncluirPersonas($incluirPersonas)
     {
@@ -100,9 +101,39 @@ class Cuit extends AbstractValidator
         return $this;
     }
 
+    /**
+     * Returns the filtrarCuitNoNumerico option
+     *
+     * @return bool
+     */
+    public function getFiltrarCuitNoNumericos()
+    {
+        return $this->options['filtrarCuitNoNumerico'];
+    }
+
+    /**
+     * Sets the filtrarCuitNoNumerico option
+     *
+     * @param  bool $filtrar
+     * @return Cuit Provides a fluent interface
+     */
+    public function setFiltrarCuitNoNumerico($filtrar)
+    {
+        $this->options['filtrarCuitNoNumerico'] = $filtrar;
+        return $this;
+    }
+
+    /**
+     * @param mixed $value
+     * @return bool
+     */
     public function isValid($value)
     {
         $this->setValue($value);
+
+        if ($this->getFiltrarCuitNoNumericos()) {
+            $value = preg_replace("/[^\d]/", "", $value);
+        }
        
         if (!is_numeric($value)) {
             $this->error(self::MSG_NUMERIC);
@@ -114,30 +145,32 @@ class Cuit extends AbstractValidator
             return false;
         }
 
-        $prefijo = (int) substr($value, 0,2);
+        $prefijo = (int) substr($value, 0, 2);
 
         $prefijos_validos = array();
 
-        if ($this->getIncluirPersonas())
+        if ($this->getIncluirPersonas()) {
             array_push($prefijos_validos, 20, 23, 24, 27);
+        }
 
-        if ($this->getIncluirEmpresas())
+        if ($this->getIncluirEmpresas()) {
             array_push($prefijos_validos, 30, 33);
+        }
 
         if (!in_array($prefijo, $prefijos_validos)) {
             $this->error(self::MSG_INVALID_PREFIX);
             return false;
         }
 
-        $coeficiente = array(5,4,3,2,7,6,5,4,3,2);
+        $coeficiente = array(5, 4, 3, 2, 7, 6, 5, 4, 3, 2);
 
         $sum=0;
 
-        for ($i=0; $i < 10 ; $i++) { 
-            $sum=$sum+($value[$i]*$coeficiente[$i]);
+        for ($i = 0; $i < 10; $i++) {
+            $sum = $sum + ($value[$i] * $coeficiente[$i]);
         }
 
-        $resto=11 - ($sum % 11);
+        $resto = 11 - ($sum % 11);
         
         if ($resto == 11) {
             $resto = 0;
@@ -147,7 +180,7 @@ class Cuit extends AbstractValidator
 
         if ($value[10] != $resto) {
             $this->error(self::MSG_INVALID);
-            return false; 
+            return false;
         }
 
         return true;

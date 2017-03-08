@@ -2,7 +2,7 @@ Módulo Validador de CUIT para ZF2
 =================================
 Clave Única de Identificación Tributaria
 utilizado por la AFIP en Argentina
-Más información en [WikiPedia](http://es.wikipedia.org/wiki/Clave_Única_de_Identificación_Tributaria)
+Más información en [Wikipedia](http://es.wikipedia.org/wiki/Clave_Única_de_Identificación_Tributaria)
 
 ##Instalacion
 
@@ -11,7 +11,7 @@ Instala el modulo con composer agregando el siguiente require "require" en el ar
 ```json
 {
 	"require": {
-		"matiasiglesias/zf2-cuit-validator": "1.*"
+		"matiasiglesias/cuit-validator": "1.*"
 	}
 }
 ```
@@ -54,6 +54,7 @@ Agrega el validador
                     'options' => array(
                         'incluirEmpresas' => true, //Permite CUIT de Empresas o Personas Juridicas
                         'incluirPersonas' => true, //Permite CUIT de Personas Fisicas
+                        'filtrarCuitNoNumerico' => true, //Filtra cualquier caracter no numérico del CUIT (ej. '-')
                     ),
                 ),
             )
@@ -65,8 +66,9 @@ Agrega el validador
 ## Configuracion
 Estas son las opciones del validador:
 
-* *incluirEmpresas* Boolean. Permite CUIT de empresas (prefijos 30 y 33). Valor por defecto *false*.
-* *incluirPersonas* Boolean. permite CUIT de personas (prefijos 20, 23, 24 y 27). Valor por defecto *true*.
+* **incluirEmpresas** Boolean. Permite CUIT de empresas (prefijos 30 y 33). Valor por defecto *false*.
+* **incluirPersonas** Boolean. Permite CUIT de personas (prefijos 20, 23, 24 y 27). Valor por defecto *true*.
+* **filtrarCuitNoNumerico** Boolean. Filtra cualquier caracter no numérico del CUIT (ej. '-'). Valor por defecto *true*.
 
 
 ## Contacto

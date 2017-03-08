@@ -1,6 +1,7 @@
 {
   "name": "matiasiglesias/cuit-validator",
   "description": "Módulo de Validación de CUIT",
+  "type": "library",
   "keywords": [
     "cuit",
     "zend framework",
@@ -10,9 +11,12 @@
     "argentina",
     "clave única de identificación tributaria"
   ],
-  "type": "library",
-  "homepage": "https://github.com/matiasiglesias/zf2-cuit-validator",
   "license": "MIT",
+  "homepage": "https://github.com/matiasiglesias/cuit-validator",
+  "support": {
+        "source": "https://github.com/matiasiglesias/cuit-validator",
+        "issues": "https://github.com/matiasiglesias/cuit-validator/issues"
+    },
   "authors": [
     {
       "name": "Matias Iglesias",
