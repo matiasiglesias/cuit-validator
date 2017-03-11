@@ -9,12 +9,15 @@ Módulo Validador de CUIT para ZF2
 [![composer.lock available](https://poser.pugx.org/matiasiglesias/cuit-validator/composerlock)](https://packagist.org/packages/matiasiglesias/cuit-validator)
 [![Dependency Status](https://www.versioneye.com/user/projects/58c414dc62d602004575bc5f/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58c414dc62d602004575bc5f)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/06c006c0-1b9d-420f-8a04-af95aa0df9eb/mini.png)](https://insight.sensiolabs.com/projects/06c006c0-1b9d-420f-8a04-af95aa0df9eb)
+[![PHP_Eye](http://php-eye.com/badge/matiasiglesias/cbu-validator/tested.svg)](https://packagist.org/packages/matiasiglesias/cbu-validator)
+[![PHP_Eye](http://php-eye.com/badge/matiasiglesias/cbu-validator/partial.svg)](https://packagist.org/packages/matiasiglesias/cbu-validator)
 
 
 #Introducción
 
 Módulo validador de Clave Única de Identificación Tributaria
-utilizado por la AFIP en Argentina
+utilizado por la AFIP en Argentina.
+
 Más información en [Wikipedia](http://es.wikipedia.org/wiki/Clave_Única_de_Identificación_Tributaria)
 
 ##Instalacion
