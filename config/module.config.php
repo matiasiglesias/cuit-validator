@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'validators' => array(
-        'invokables' => array(
+    'validators' => [
+        'invokables' => [
             'Cuit' => 'CuitValidator\Validator\Cuit'
-        ),
-    ),
+        ],
+    ],
 ];

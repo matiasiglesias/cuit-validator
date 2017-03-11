@@ -5,7 +5,6 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - wget http://get.sensiolabs.org/php-cs-fixer.phar
   - composer self-update
 
 install:
@@ -13,11 +12,14 @@ install:
 
 script:
   - (cd tests ; ../vendor/bin/phpunit -c phpunit.xml)
+  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/php-cs-fixer --config=.php_cs fix -v --diff --dry-run --using-cache=no; fi
 
 matrix:
   fast_finish: true
   include:
     - php: 5.6
+      env:
+        - EXECUTE_CS_CHECK=true
     - php: 7
     - php: 7.1
     - php: hhvm

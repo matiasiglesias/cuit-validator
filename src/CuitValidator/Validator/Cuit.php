@@ -30,23 +30,23 @@ class Cuit extends AbstractValidator
     const MSG_INVALID_PREFIX = 'MsgInvalidPrefix';
     const MSG_INVALID_LENGTH = 'MsgInvalidLength';
 
-    protected $messageTemplates = array(
+    protected $messageTemplates = [
         self::MSG_NUMERIC => "'%value%' no es numerico",
         self::MSG_INVALID => "'%value%' no es un CUIT valido",
         self::MSG_INVALID_PREFIX => "Prefijo de CUIT invalido",
         self::MSG_INVALID_LENGTH => "El CUIT debe tener 11 digitos",
-    );
+    ];
 
     /**
      * Options for the between validator
      *
      * @var array
      */
-    protected $options = array(
+    protected $options = [
         'incluirEmpresas' => false,
         'incluirPersonas' => true,
         'filtrarCuitNoNumerico' => true,
-    );
+    ];
 
     /**
      * Sets validator options
@@ -56,7 +56,7 @@ class Cuit extends AbstractValidator
      *
      * @param  array|Traversable $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -93,6 +93,7 @@ class Cuit extends AbstractValidator
     public function setIncluirEmpresas($incluirEmpresas)
     {
         $this->options['incluirEmpresas'] = $incluirEmpresas;
+
         return $this;
     }
 
@@ -115,6 +116,7 @@ class Cuit extends AbstractValidator
     public function setIncluirPersonas($incluirPersonas)
     {
         $this->options['incluirPersonas'] = $incluirPersonas;
+
         return $this;
     }
 
@@ -137,6 +139,7 @@ class Cuit extends AbstractValidator
     public function setFiltrarCuitNoNumerico($filtrar)
     {
         $this->options['filtrarCuitNoNumerico'] = $filtrar;
+
         return $this;
     }
 
@@ -154,17 +157,19 @@ class Cuit extends AbstractValidator
 
         if (!is_numeric($value)) {
             $this->error(self::MSG_NUMERIC);
+
             return false;
         }
 
         if (strlen($value) != 11) {
             $this->error(self::MSG_INVALID_LENGTH);
+
             return false;
         }
 
         $prefijo = (int) substr($value, 0, 2);
 
-        $prefijos_validos = array();
+        $prefijos_validos = [];
 
         if ($this->getIncluirPersonas()) {
             array_push($prefijos_validos, 20, 23, 24, 27);
@@ -176,12 +181,13 @@ class Cuit extends AbstractValidator
 
         if (!in_array($prefijo, $prefijos_validos)) {
             $this->error(self::MSG_INVALID_PREFIX);
+
             return false;
         }
 
-        $coeficiente = array(5, 4, 3, 2, 7, 6, 5, 4, 3, 2);
+        $coeficiente = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
 
-        $sum=0;
+        $sum = 0;
 
         for ($i = 0; $i < 10; $i++) {
             $sum = $sum + ($value[$i] * $coeficiente[$i]);
@@ -197,6 +203,7 @@ class Cuit extends AbstractValidator
 
         if ($value[10] != $resto) {
             $this->error(self::MSG_INVALID);
+
             return false;
         }
 

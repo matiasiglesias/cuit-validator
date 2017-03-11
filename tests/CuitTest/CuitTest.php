@@ -11,7 +11,6 @@
 namespace CuitValidator\Validator;
 
 use PHPUnit_Framework_TestCase;
-use CuitValidator\Validator\Cuit;
 
 class CuitTest extends PHPUnit_Framework_TestCase
 {
