@@ -1,25 +1,42 @@
 <?php
+/**
+ * Copyright (c) 2013-2017 Matias Iglesias <matiasiglesias@matiasiglesias.com.ar>.
+ *
+ *
+ * Redistribution and use in source and binary forms are permitted
+ * provided that the above copyright notice and this paragraph are
+ * duplicated in all such forms and that any documentation, advertising
+ * materials, and other materials related to such distribution and use
+ * acknowledge that the software was developed by Matias Iglesias. The
+ * name of the Matias Iglesias may not be used to endorse or promote
+ * products derived from this software without specific prior written
+ * permission.
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
 namespace CuitValidator\Validator;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
-                    
+
 class Cuit extends AbstractValidator
 {
     const MSG_NUMERIC = 'msgNumeric';
     const MSG_INVALID = 'MsgInvalid';
     const MSG_INVALID_PREFIX = 'MsgInvalidPrefix';
     const MSG_INVALID_LENGTH = 'MsgInvalidLength';
-                                
+
     protected $messageTemplates = array(
         self::MSG_NUMERIC => "'%value%' no es numerico",
         self::MSG_INVALID => "'%value%' no es un CUIT valido",
         self::MSG_INVALID_PREFIX => "Prefijo de CUIT invalido",
         self::MSG_INVALID_LENGTH => "El CUIT debe tener 11 digitos",
     );
-    
+
     /**
      * Options for the between validator
      *
@@ -79,7 +96,7 @@ class Cuit extends AbstractValidator
         return $this;
     }
 
-   /**
+    /**
      * Returns the incluirPersonas option
      *
      * @return bool
@@ -134,7 +151,7 @@ class Cuit extends AbstractValidator
         if ($this->getFiltrarCuitNoNumericos()) {
             $value = preg_replace("/[^\d]/", "", $value);
         }
-       
+
         if (!is_numeric($value)) {
             $this->error(self::MSG_NUMERIC);
             return false;
@@ -171,7 +188,7 @@ class Cuit extends AbstractValidator
         }
 
         $resto = 11 - ($sum % 11);
-        
+
         if ($resto == 11) {
             $resto = 0;
         } elseif ($resto == 10) {
