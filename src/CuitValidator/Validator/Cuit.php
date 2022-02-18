@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013-2017 Matias Iglesias <matiasiglesias@matiasiglesias.com.ar>.
+ * Copyright (c) 2013-2022 Matias Iglesias <matiasiglesias@matiasiglesias.com.ar>.
  *
  *
  * Redistribution and use in source and binary forms are permitted
@@ -46,6 +46,7 @@ class Cuit extends AbstractValidator
         'incluirEmpresas' => false,
         'incluirPersonas' => true,
         'filtrarCuitNoNumerico' => true,
+        'whiteList' => [],
     ];
 
     /**
@@ -53,6 +54,8 @@ class Cuit extends AbstractValidator
      * Accepts the following option keys:
      *   'incluirEmpresas' => boolean, permite CUIT de empresas (prefijos 30 y 33)
      *   'incluirPersonas' => boolean, permite CUIT de personas (prefijos 20, 23, 24 y 27)
+     *   'filtrarCuitNoNumerico' => boolean, filtra los caracteres no numéricos, por ejemplo, los guiones "-"
+     *   'whiteList' => array, lista de CUITs permitidos, por ejemplo, ['20-12345678-9', '99-99999999-9']
      *
      * @param  array|Traversable $options
      */
@@ -144,6 +147,29 @@ class Cuit extends AbstractValidator
     }
 
     /**
+     * Returns the whiteList option
+     *
+     * @return string[]
+     */
+    public function getWhiteList()
+    {
+        return $this->options['whiteList'];
+    }
+
+    /**
+     * Sets the whiteList option
+     *
+     * @param  bool $filtrar
+     * @return Cuit Provides a fluent interface
+     */
+    public function setWhiteList($whiteList)
+    {
+        $this->options['whiteList'] = $whiteList;
+
+        return $this;
+    }
+
+    /**
      * @param mixed $value
      * @return bool
      */
@@ -153,6 +179,14 @@ class Cuit extends AbstractValidator
 
         if ($this->getFiltrarCuitNoNumericos()) {
             $value = preg_replace("/[^\d]/", "", $value);
+        }
+
+        // Me fijo si el cuit está en el whiteList
+        if (!empty($this->getWhiteList())) {
+            if (in_array($value, $this->getWhiteList())) {
+
+                return true;
+            }
         }
 
         if (!is_numeric($value)) {
