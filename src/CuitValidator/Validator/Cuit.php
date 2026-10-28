@@ -20,8 +20,8 @@
 namespace CuitValidator\Validator;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\AbstractValidator;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\Validator\AbstractValidator;
 
 class Cuit extends AbstractValidator
 {
@@ -178,7 +178,7 @@ class Cuit extends AbstractValidator
         $this->setValue($value);
 
         if ($this->getFiltrarCuitNoNumericos()) {
-            $value = preg_replace("/[^\d]/", "", $value);
+            $value = preg_replace("/[^\d]/", "", (string) $value);
         }
 
         // Me fijo si el cuit está en el whiteList

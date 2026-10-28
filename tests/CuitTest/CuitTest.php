@@ -10,14 +10,14 @@
 
 namespace CuitValidator\Validator;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class CuitTest extends PHPUnit_Framework_TestCase
+class CuitTest extends TestCase
 {
     /** @var  Cuit */
     protected $validador;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->validador = new Cuit();
     }

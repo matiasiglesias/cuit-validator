@@ -2,9 +2,8 @@
 
 namespace CuitValidator;
 
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ValidatorProviderInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ValidatorProviderInterface;
 
 /**
  * Class Module
@@ -12,7 +11,6 @@ use Zend\ModuleManager\Feature\ValidatorProviderInterface;
  * @author Matias Iglesias <matiasiglesias@matiasiglesias.com.ar>
  */
 class Module implements
-    AutoloaderProviderInterface,
     ConfigProviderInterface,
     ValidatorProviderInterface
 {
@@ -24,25 +22,12 @@ class Module implements
         return include __DIR__ . '/config/module.config.php';
     }
 
-    /**
-     * @return array|\Zend\ServiceManager\Config
-     */
-    public function getAutoloaderConfig()
-    {
-        return [
-            'Zend\Loader\StandardAutoloader' => [
-                'namespaces' => [
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ],
-            ],
-        ];
-    }
 
     /**
-     * Expected to return \Zend\ServiceManager\Config object or array to
+     * Expected to return \Laminas\ServiceManager\Config object or array to
      * seed such an object.
      *
-     * @return array|\Zend\ServiceManager\Config
+     * @return array|\Laminas\ServiceManager\Config
      */
     public function getValidatorConfig()
     {

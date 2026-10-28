@@ -4,19 +4,18 @@
   "type": "library",
   "keywords": [
     "cuit",
-    "zend framework",
-    "zf2",
     "validator",
     "afip",
     "argentina",
-    "clave única de identificación tributaria"
+    "clave única de identificación tributaria",
+    "laminas"
   ],
   "license": "MIT",
   "homepage": "https://github.com/matiasiglesias/cuit-validator",
   "support": {
-        "source": "https://github.com/matiasiglesias/cuit-validator",
-        "issues": "https://github.com/matiasiglesias/cuit-validator/issues"
-    },
+    "source": "https://github.com/matiasiglesias/cuit-validator",
+    "issues": "https://github.com/matiasiglesias/cuit-validator/issues"
+  },
   "authors": [
     {
       "name": "Matias Iglesias",
@@ -27,20 +26,22 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "php": "^5.6 || ^7.0",
-    "zendframework/zend-stdlib": "^2.4 || ^3.0",
-    "zendframework/zend-validator": "^2.4"
+    "php": "^8.1",
+    "laminas/laminas-stdlib": "^3.0",
+    "laminas/laminas-validator": "^2.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.7",
-    "friendsofphp/php-cs-fixer": "^2.1"
+    "phpunit/phpunit": "^10.5 || ^11.0"
   },
   "autoload": {
-    "psr-0": {
-      "CuitValidator": "src/"
+    "psr-4": {
+      "CuitValidator\\": "src/CuitValidator/"
     },
     "classmap": [
       "./Module.php"
     ]
+  },
+  "config": {
+    "sort-packages": true
   }
 }

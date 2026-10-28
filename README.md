@@ -1,7 +1,6 @@
-Módulo Validador de CUIT para ZF2
-=================================
+Módulo Validador de CUIT para Laminas
+=====================================
 
-[![Build Status](https://travis-ci.org/matiasiglesias/cuit-validator.svg?branch=master)](https://travis-ci.org/matiasiglesias/cuit-validator)
 [![Latest Stable Version](https://poser.pugx.org/matiasiglesias/cuit-validator/version)](https://packagist.org/packages/matiasiglesias/cuit-validator)
 [![Latest Unstable Version](https://poser.pugx.org/matiasiglesias/cuit-validator/v/unstable)](//packagist.org/packages/matiasiglesias/cuit-validator)
 [![Total Downloads](https://poser.pugx.org/matiasiglesias/cuit-validator/downloads)](https://packagist.org/packages/matiasiglesias/cuit-validator)
@@ -13,24 +12,26 @@ Módulo Validador de CUIT para ZF2
 [![PHP_Eye](http://php-eye.com/badge/matiasiglesias/cbu-validator/partial.svg)](https://packagist.org/packages/matiasiglesias/cbu-validator)
 
 
-#Introducción
+# Introducción
 
 Módulo validador de Clave Única de Identificación Tributaria
 utilizado por la AFIP en Argentina.
 
 Más información en [Wikipedia](http://es.wikipedia.org/wiki/Clave_Única_de_Identificación_Tributaria)
 
-##Instalacion
+## Instalación
 
 Instala el módulo con composer agregando el siguiente require "require" en el archivo `composer.json`
 
 ```json
 {
 	"require": {
-		"matiasiglesias/cuit-validator": "1.*"
+		"matiasiglesias/cuit-validator": "^2.0"
 	}
 }
 ```
+
+La 2.x corre sobre PHP 8.1+ y `laminas/laminas-validator` 2.x (Laminas MVC 3). La 1.x es la de Zend Framework 2 y PHP 5.6 a 7.
 
 luego, ejecuta
 
